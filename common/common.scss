@@ -1,0 +1,142 @@
+:root {
+  --post-avatar-width: 140px;
+  --post-name-max-width: 180px;
+  --post-topic-avatar-gap: 0.8em;
+  --post-topic-avatar-spacing: 1em;
+}
+
+.desktop-view {
+  .post-info.edits .widget-button {
+    padding-left: 0;
+  }
+
+  .topic-meta-data {
+    .trigger-user-card {
+      display: none;
+    }
+  }
+
+  .topic-avatar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--post-topic-avatar-gap);
+    padding-right: var(--post-topic-avatar-spacing);
+    padding-bottom: 1em;
+    min-width: var(--post-avatar-width);
+    width: var(--post-avatar-width);
+
+    .trigger-user-card {
+      display: flex;
+      flex-direction: column;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.3em;
+
+      .username::before {
+        content: "@";
+      }
+
+      .username.new-user::before {
+        color: var(--primary-low-mid);
+      }
+
+      .username + :not(.user-title) {
+        margin-top: 1em;
+      }
+
+      .username + .user-title {
+        margin-bottom: 1em;
+      }
+
+      .name,
+      .username {
+        max-width: var(--post-name-max-width);
+      }
+
+      span {
+        text-align: center;
+        place-content: center;
+      }
+
+      // User Badges
+      .poster-icon-container {
+        display: flex;
+        order: 2;
+
+        span.poster-icon {
+          overflow: visible;
+          display: flex;
+          align-items: center;
+          margin: 0 8px 0 0;
+
+          &.badge-type-bronze .fa {
+            color: var(--bronze);
+          }
+
+          &.badge-type-silver .fa {
+            color: var(--silver);
+          }
+
+          &.badge-type-gold .fa {
+            color: var(--gold);
+          }
+
+          img {
+            display: flex;
+            height: 0.87em;
+            width: 0.87em;
+          }
+
+          .fa,
+          img {
+            opacity: 1;
+            animation: fadeIn 0.5s ease;
+          }
+        }
+      }
+
+      .poster-icon-container.show-highest {
+        span.poster-icon {
+          &.basic,
+          &.member,
+          &.regular,
+          &.leader {
+            display: none;
+          }
+        }
+
+        &.basic-highest .basic,
+        &.member-highest .member,
+        &.regular-highest .regular,
+        &.leader-highest .leader {
+          display: flex !important;
+        }
+      }
+    }
+  }
+
+  --horizontal-shift: var(--post-avatar-width) -
+    var(--post-topic-avatar-spacing) - var(--post-topic-avatar-gap);
+
+  .post-notice {
+    max-width: calc(
+      var(--topic-body-width) + var(--topic-body-width-padding) * 2 +
+        var(--topic-avatar-width) + var(--horizontal-shift)
+    );
+  }
+
+  .topic-map {
+    max-width: calc(
+      var(--topic-avatar-width) + var(--topic-body-width) +
+        var(--topic-body-width-padding) * 2 + var(--horizontal-shift)
+    );
+  }
+
+  .topic-map.--op {
+    padding-left: calc(
+      var(--topic-body-width-padding) + var(--topic-avatar-width) +
+        var(--horizontal-shift)
+    );
+  }
+}
